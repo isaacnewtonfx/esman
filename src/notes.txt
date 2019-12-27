@@ -1,0 +1,12 @@
+https://www.robinwieruch.de/react-state-array-add-update-remove
+
+https://stackoverflow.com/questions/43638938/updating-an-object-with-setstate-in-react
+
+https://www.freecodecamp.org/news/get-pro-with-react-setstate-in-10-minutes-d38251d1c781/
+
+https://blog.logrocket.com/a-guide-to-usestate-in-react-ecb9952e406c/
+
+
+https://create-react-app.dev/docs/running-tests/
+
+https://stackoverflow.com/questions/56827300/how-to-test-a-component-using-react-redux-hooks

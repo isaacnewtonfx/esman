@@ -1,0 +1,282 @@
+/* Color Scheme */
+$primary-color: #2f4f4f;
+$primary-color-fade1: rgb(63, 75, 87);
+$primary-color-fade2: #e8e8e8;
+$secondary-color: gold;
+
+/* Mobile First Styling */
+
+/* layout */
+.parent-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background:red;
+}
+
+/* layout */
+.menu-container {
+  order: 2;
+  display: flex;
+  flex-wrap: wrap;
+  background: $primary-color;
+  text-align: center;
+  width: 100%;
+  height: 55px;
+  z-index: 1002;
+  position: fixed;
+  bottom: 0;
+}
+.menu-container a {
+  color: white;
+  margin-top: 10px;
+  width: 16%;
+}
+.menu-container a.active_menu {
+  color: $secondary-color;
+}
+
+/* layout */
+.drawer {
+  overflow-y: auto;
+  position: fixed;
+  order: 0;
+  background-color: white;
+  width: 100%;
+  height: calc(100% - 55px);
+  margin-left: 0px;
+  transition: margin-left 1s ease;
+  z-index: 1002;
+}
+
+.hide_drawer {
+  margin-left: -100%;
+  transition: margin-left 1s ease;
+}
+
+/* layout */
+.mapview {
+  order: 1;
+  flex-grow: 1;
+  background-color:"#F2F0E9";
+  height: calc(100% - 55px);
+  width: 100%;
+  
+}
+
+.gallerySection {
+  background-color: $primary-color-fade1;
+  height: calc(100% - 55px);
+  width: 100%;
+  z-index: 1003;
+  position: absolute;
+  right: 0;
+  opacity: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// .listingDiv th,
+// td {
+//   padding-left: 20px !important;
+//   padding-right: 0px !important;
+// }
+
+.brand-name {
+  background: white;
+  margin: 0.5em 0.5em;
+  padding: 0.75em 0.25em;
+  color: $primary-color;
+  font-weight: bolder;
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 120%;
+  line-height: 25px;
+}
+img {
+  max-width: 100%;
+}
+aside header .logo {
+  width: 100%;
+  text-align: center;
+  padding: 0.2em 0;
+  background: #606060;
+  line-height: 0;
+}
+
+button.app-btn {
+  background-color: $primary-color !important;
+}
+
+.home-buttons-section {
+  padding: 1.5em;
+}
+.home-buttons-section a {
+  font-size: 1.1em;
+}
+
+.marketing-message {
+  background: $primary-color-fade2;
+  padding: 1em;
+}
+
+div.v-tabs__wrapper {
+  background: $primary-color;
+}
+
+a.toggle-icon {
+  color: $primary-color;
+}
+
+/* End Mobile First Styling */
+
+/* beyond 600px width */
+@media screen and (min-width: 600px) {
+  /* layout */
+  .menu-container {
+    position: static;
+    order: 0;
+    align-content: flex-start;
+    width: 65px;
+    height: 100vh;
+    z-index: 410;
+  }
+  .menu-container a {
+    width: 100%;
+    height: 55px;
+  }
+
+  /* layout */
+  .drawer {
+    position: static;
+    order: 1;
+    width: calc(0% + 380px);
+    height: 100vh;
+    z-index: 0;
+  }
+
+  /* layout */
+  .mapview {
+    order: 2;
+    height: 100%;
+    width: calc(100% - 450px);
+  }
+
+  .hide_drawer {
+    margin-left: -380px;
+  }
+
+  .gallerySection {
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+    opacity: 0.9;
+  }
+  .expand_width {
+    width: calc(100% - 65px);
+  }
+
+  .gallery-container {
+    height:200px !important;
+  }
+
+}
+
+// -----------------------------------------------------------//
+html,body {
+  font-family: Helvetica, Arial, sans-serif;
+  height:100%;
+  width:100%;
+}
+
+#root{
+  height:100%;
+}
+
+.red--text {
+  color: red;
+}
+
+.title {
+  font-size: 20px !important;
+  font-weight: 500;
+  line-height: 1 !important;
+  letter-spacing: 0.02em !important;
+  font-family: Roboto, sans-serif !important;
+}
+
+.active {
+  color: gold !important;
+}
+
+.material-button {
+  background: $primary-color !important;
+  color: white !important;
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 50% 50%;
+  gap: 4px;
+  padding: 20px;
+  height: 230px;
+}
+
+.gallery-div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+// .gallery-container {
+//   padding: 1em 0em 1em 1.2em;
+// }
+// .gallery-div {
+//   display: inline-block;
+//   width: 30%;
+// }
+// .gallery-div img{
+//   max-width: 95%;
+// }
+
+
+
+.viewer-close{
+  height:95px !important;
+  width:95px !important;
+  background-color: red !important;
+}
+
+
+.drawer-search-container,.drawer-email-container{
+  background:#e8e8e8; 
+  padding: 13px;
+}
+
+.title1{
+  margin:0px;
+  font-weight: 500;
+}
+
+.MuiTablePagination-toolbar{
+  padding-left: 10px !important;
+}
+
+div.MuiInputBase-root,div.MuiTablePagination-input,div.MuiTablePagination-selectRoot{
+  margin-left:0px;
+  margin-right:10px;
+}
+
+div.MuiTablePagination-actions{
+  margin-left:10px;
+}
+
+.leaflet-popup-content{
+  width: 110px !important;
+}

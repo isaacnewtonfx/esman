@@ -1,0 +1,55 @@
+.legend {
+    border: 1px solid gray;
+    padding: 5px;
+    background-color: white !important;
+  }
+  
+  .legend_symbol {
+    height: 15px;
+    width: 15px;
+    /* border-radius: 50%; */
+    display: inline-block;
+  }
+  
+  
+  .btn-popup.details{
+    padding: 6px;
+    border-radius: 3px;
+    /* background:#2F4F4F; */
+    color:#ffffff;
+  }
+  
+  .btn-popup.mail, .btn-popup.favorite{
+    width:30px;
+    padding:6px;
+    border-radius: 3px;
+    background:#4aabd6;
+    color:#ffffff;
+  }
+  
+  
+  .leaflet-popup-content{
+    width:80%;
+  }
+  
+  #unit-title,#unit-value{
+    font-size: larger;
+  }
+  
+  #unit-value{
+    position:absolute;
+    right:20px;
+    color:red;
+  }
+  
+  #unit-price,#unit-type{
+    position:absolute;
+    right:20px;
+    font-size:larger;
+  }
+
+
+  .leaflet-map{
+    height:100%;
+    width:100%;
+  }
