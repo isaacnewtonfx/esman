@@ -18,5 +18,5 @@ workflows:
     jobs:
       - build
       - test
-          requires:
+          requires
             - build #wait for build to complete successfully before running
