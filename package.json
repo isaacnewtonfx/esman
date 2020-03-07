@@ -28,7 +28,9 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "serve -s build",
+    "start_bak": "react-scripts start",
+    "deploy": "serve -s build",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
