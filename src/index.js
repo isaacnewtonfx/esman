@@ -65,7 +65,7 @@ ReactDOM.render(
 
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-    <HashRouter>
+    <BrowserRouter>
 
       <Switch>
         <Route path="/signin" exact component={SignIn} />
@@ -77,7 +77,7 @@ ReactDOM.render(
         <Route component={NoMatch} />
       </Switch>
 
-    </HashRouter>
+    </BrowserRouter>
     </ThemeProvider>
   </Provider>
   ,
