@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 import {
+  BACKEND_DOMAIN,
   TOGGLE_DRAWER,
   SHOW_DRAWER,
   SHOW_MENU,
@@ -301,12 +302,12 @@ function isDrawerShown(state = true, action){
 
 function urls(state = {
 
-  propertiesURL : "http://localhost:8000/api/properties/",
-  estatesURL : "http://localhost:8000/api/estates/",
-  propertyTypesURL : "http://localhost:8000/api/property_types/",
-  enquiryURL: "http://localhost:8000/api/enquiry/",
-  authURL: "http://localhost:8000/auth-jwt/",
-  refreshTokenURL: "http://localhost:8000/api/refreshtoken/"
+  propertiesURL    : `${BACKEND_DOMAIN}/api/properties/`,
+  estatesURL       : `${BACKEND_DOMAIN}/api/estates/`,
+  propertyTypesURL : `${BACKEND_DOMAIN}/api/property_types/`,
+  enquiryURL       : `${BACKEND_DOMAIN}/api/enquiry/`,
+  authURL          : `${BACKEND_DOMAIN}/auth-jwt/`,
+  refreshTokenURL  : `${BACKEND_DOMAIN}/api/refreshtoken/`
 
 }, action){
   switch(action.type){

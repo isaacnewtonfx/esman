@@ -4,7 +4,7 @@ const axios = require('axios').default;
 /*
  * action types
  */
-
+export const BACKEND_DOMAIN = 'https://backend.survtechengineering.com/estateman'
 export const SHOW_MENU = 'SHOW_MENU'
 export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
 export const SHOW_DRAWER = 'SHOW_DRAWER'
