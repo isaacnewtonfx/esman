@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter,HashRouter, Route, Switch} from 'react-router-dom'
 import App from './app'
 import SignIn from './components/Auth/SignIn'
 import SignUp from './components/Auth/SignUp'
@@ -65,7 +65,7 @@ ReactDOM.render(
 
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-    <BrowserRouter>
+    <HashRouter>
 
       <Switch>
         <Route path="/signin" exact component={SignIn} />
@@ -77,7 +77,7 @@ ReactDOM.render(
         <Route component={NoMatch} />
       </Switch>
 
-    </BrowserRouter>
+    </HashRouter>
     </ThemeProvider>
   </Provider>
   ,
