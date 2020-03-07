@@ -65,7 +65,7 @@ ReactDOM.render(
 
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-    <BrowserRouter basename="/app">
+    <BrowserRouter>
 
       <Switch>
         <Route path="/signin" exact component={SignIn} />
