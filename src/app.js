@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {authCheckStateAsync} from './store/actions';
 
 import './app.scss'
-import MainLayout from './MainLayout/MainLayout'
+import Home from './components/Home'
 
 export default function App(){
   const dispatch = useDispatch();
@@ -15,5 +15,5 @@ export default function App(){
   });
 
       
-  return <MainLayout/>
+  return <Home/>
 }
