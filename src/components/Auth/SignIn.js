@@ -17,7 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Snackbar from '../../components/Snackbar';
 import {Redirect} from 'react-router-dom';
 
-import {updateSnackbarData, setAuthToken, refreshTokenAtIntervals,authCheckStateAsync} from '../../store/actions';
+import {updateSnackbarData, setAuthToken, refreshTokenAtIntervalsAsync,authCheckStateAsync,fetchUserDataAsync} from '../../store/actions';
 
 const axios = require('axios').default;
 
@@ -60,12 +60,16 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function SignIn() {
+  const dispatch = useDispatch();
+  const classes = useStyles();
+
   const tokenExpiryTime = useSelector(state=>state.tokenExpiryTime)
   const refreshTokenTimeInterval = useSelector(state=>state.refreshTokenTimeInterval)
   const authToken = useSelector(state=>state.authToken)
-  const dispatch = useDispatch();
-  const classes = useStyles();
   const urls = useSelector(state => state.urls);
+  const properties = useSelector(state => state.properties);
+
+
   let [isFormSubmitting, setIsFormSubmitting] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -139,7 +143,10 @@ export default function SignIn() {
           localStorage.setItem('expirationDate', expirationDate);
 
           dispatch(setAuthToken(token));
-          dispatch(refreshTokenAtIntervals(token, urls.refreshTokenURL,tokenExpiryTime, refreshTokenTimeInterval));
+          dispatch(refreshTokenAtIntervalsAsync(token, urls.refreshTokenURL,tokenExpiryTime, refreshTokenTimeInterval));
+
+          dispatch(fetchUserDataAsync(urls.userDataURL))
+          
 
         }else{
            console.log("A problem occured refreshing token");

@@ -15,13 +15,20 @@ class DrawerHome extends React.Component{
         super()
 
         this.handleShowGalleryViewer = this.handleShowGalleryViewer.bind(this)
+        this.handleSignOut = this.handleSignOut.bind(this)
     }
 
     handleShowGalleryViewer(index, imgName){
         this.props.reindexClickedImage(index,imgName)
         this.props.setGalleryOpenStatus(true)
-
         this.props.showGalleryViewer()        
+    }
+
+    handleSignOut(){
+
+        localStorage.removeItem('token');
+        localStorage.removeItem('expirationDate');
+        window.location.reload();
     }
 
     render(){
@@ -40,6 +47,16 @@ class DrawerHome extends React.Component{
                         &nbsp;
                         VIEW ALL UNITS
                     </Button>
+
+                    &nbsp;&nbsp;&nbsp;
+                    {this.props.authToken && 
+                                            
+                        <Button variant="contained" style={{backgroundColor:'#8B0000', color:'white'}} onClick={()=> this.handleSignOut()}>
+                            SIGN OUT
+                        </Button>                    
+                    }
+                    
+
                 </section>
 
                 <br/>
@@ -94,7 +111,7 @@ class DrawerHome extends React.Component{
 
 // Connecting to the Store
 const mapStateToProps = (state) =>{
-    return {galleryImages: state.galleryImages, isGalleryOpen: state.isGalleryOpen}
+    return {galleryImages: state.galleryImages, isGalleryOpen: state.isGalleryOpen,authToken: state.authToken}
 }
 const mapDispatchToProps = {showMenu, reindexClickedImage,setGalleryOpenStatus}
   

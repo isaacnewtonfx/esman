@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect } from 'react';
 import L from 'leaflet';
 import './Map.css';
 import $ from 'jquery'
@@ -13,7 +13,7 @@ export let allProperties = [];
 export let selectFeatureOnMap = null;
 export let resizeMap = null;
 
-
+let lyrProperties = null;
 let lyrHoverPopup = null;
 let lyrPopup2 = null;
 
@@ -25,11 +25,9 @@ const numberWithCommas = (x) => {
 
 
 export default function Map() {
-  const lyrPropertiesRef = React.useRef(null);
   const urls = useSelector(state => state.urls);
   const userData = useSelector(state => state.userData)
   const dispatch = useDispatch();
-  const [doneProcessingProperties, setDoneProcessingProperties] = useState(null);
 
   // run after component is mounted
   useEffect(() => {
@@ -37,39 +35,6 @@ export default function Map() {
     initMap()
     loadProperties()
   }, [])//only re-render when map changes
-
-
-
-  useEffect(() => {
-    
-    if(doneProcessingProperties){
-
-      lyrPropertiesRef.current.bindPopup(layer =>{
-
-       let manageBtn = ""
-       if (userData.is_staff){
-         manageBtn = `<button id="btn-view-details" class='btn-popup details app-btn'> <i class='fa fa-info'></i> Manage </button>`
-       }
-
-        //set the selectedFeature globally
-        dispatch(setSelectedProperty(layer.feature));
-        return `<span> <b id="unit-title">Unit:</b> <b id="unit-value">${layer.feature.properties.unit}</b></span>
-                      <br>
-                      <span> <b id="unit-title">Type:</b> &nbsp;&nbsp;&nbsp; <b id="unit-type">${layer.feature.properties.property_type}</b></span>
-                      <br>
-                      <span> <b id="unit-title">Price:</b> &nbsp;&nbsp;&nbsp; <b id="unit-price">$${numberWithCommas(layer.feature.properties.price)}</b></span>
-                      <br><br>
-                      <button id="btn-view-details" class='btn-popup details app-btn'> <i class='fa fa-info'></i> Details</button>
-                      ${manageBtn}
-                      `
-    }, {
-      autoClose: false
-    });
-
-    }
-    
-  },[doneProcessingProperties, userData])
-
 
 
   const setupDynamicElementEvents = selectedProperty => {
@@ -128,10 +93,9 @@ export default function Map() {
 
   }
 
-
   const loadProperties = () => {
 
-   axios.get(urls.propertiesURL, {
+    axios.get(urls.propertiesURL, {
       params: {
         //   ID: 12345
       }
@@ -139,8 +103,9 @@ export default function Map() {
       .then(function (response) {
         // console.log(response);
 
+
         const propertiesGeoJson = response.data;
-        lyrPropertiesRef.current = L.geoJSON(propertiesGeoJson, {
+        lyrProperties = L.geoJSON(propertiesGeoJson, {
           style: function (feature) {
             return getStyle(feature.properties.status);
           },
@@ -150,17 +115,36 @@ export default function Map() {
               mouseout: onmouseout
             });
           }
-        })
+        }).bindPopup(function (layer) {
+
+          //set the selectedFeature globally
+          dispatch(setSelectedProperty(layer.feature));
+
+         console.log(userData)
+
+          return `<span> <b id="unit-title">Unit:</b> <b id="unit-value">${layer.feature.properties.unit}</b></span>
+                        <br>
+                        <span> <b id="unit-title">Type:</b> &nbsp;&nbsp;&nbsp; <b id="unit-type">${layer.feature.properties.property_type}</b></span>
+                        <br>
+                        <span> <b id="unit-title">Price:</b> &nbsp;&nbsp;&nbsp; <b id="unit-price">$${numberWithCommas(layer.feature.properties.price)}</b></span>
+                        <br><br>
+                        <button id="btn-view-details" class='btn-popup details app-btn'> <i class='fa fa-info'></i> Details</button>
+                        <button id="btn-manage" class='btn-popup details app-btn'> <i class='fa fa-info'></i> Manage</button>
+                        `
+        }, {
+          autoClose: false
+        });
 
         //add the geojson layer to map
-        lyrPropertiesRef.current.addTo(map);
+        lyrProperties.addTo(map);
 
         //zoom the map to show the properties extents
-        map.fitBounds(lyrPropertiesRef.current.getBounds());
+        map.fitBounds(lyrProperties.getBounds());
 
 
         // Store the properties geojson to global state
         dispatch(setProperties(propertiesGeoJson.features));
+
 
         allProperties = propertiesGeoJson.features;
 
@@ -170,7 +154,6 @@ export default function Map() {
       })
       .finally(function () {
         // always executed
-        setDoneProcessingProperties(true); 
       });
 
   }
@@ -249,8 +232,8 @@ export default function Map() {
     let outLayer = null;
 
     //get the feature from the layer using the unit id
-    for (var layer_id in lyrPropertiesRef.current._layers) {
-      let layer = lyrPropertiesRef.current._layers[layer_id]
+    for (var layer_id in lyrProperties._layers) {
+      let layer = lyrProperties._layers[layer_id]
       if (layer.feature.properties.unit == unit) {
         outLayer = layer
         break
@@ -284,11 +267,12 @@ export default function Map() {
                           <br>
                           <span> <b id="unit-title">Price:</b> &nbsp;&nbsp;&nbsp; <b id="unit-price">$${numberWithCommas(price)}</b></span>
                           <br><br>
-                          <button id="btn-view-details" class='btn-popup details app-btn'> <i class='fa fa-info'></i> Details</button>`
+                          <button id="btn-view-details" class='btn-popup details app-btn'> <i class='fa fa-info'></i> Details</button>
+                          <button id="btn-manage" class='btn-popup details app-btn'> <i class='fa fa-info'></i> Manage</button>`
 
 
     // close the bound popup if it is opened
-    lyrPropertiesRef.current.closePopup();
+    lyrProperties.closePopup();
 
     //close existing popup2 to avoid multiple popups on the map
     map.closePopup(lyrPopup2);

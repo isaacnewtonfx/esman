@@ -16,9 +16,31 @@ import {
   SET_FILTERED_PROPERTIES,
   SET_SELECTED_PROPERTY_VISIBILITY,
   SET_AUTH_TOKEN,
-  AUTH_LOGOUT
+  AUTH_LOGOUT,
+  UPDATE_USER_DATA
 } from './actions'
 
+
+function userData(state = {
+  username: '',
+  is_staff:'',
+  is_superuser:'',
+  properties: [],
+
+}, action){
+  switch(action.type){
+
+    case UPDATE_USER_DATA:
+      return {...state, 
+        username:action.payload.username,
+        is_staff:action.payload.is_staff, 
+        is_superuser:action.payload.is_superuser,
+        properties:action.payload.properties}
+
+    default:
+      return state
+  }
+}
 
 
 function unitSearchFormData(state = {
@@ -302,6 +324,7 @@ function isDrawerShown(state = true, action){
 
 function urls(state = {
 
+  userDataURL    : `${BACKEND_DOMAIN}/api/user_data/`,
   propertiesURL    : `${BACKEND_DOMAIN}/api/properties/`,
   estatesURL       : `${BACKEND_DOMAIN}/api/estates/`,
   propertyTypesURL : `${BACKEND_DOMAIN}/api/property_types/`,
@@ -374,7 +397,8 @@ const rootReducer = combineReducers({
   showSelectedProperty,
   authToken,
   tokenExpiryTime,
-  refreshTokenTimeInterval
+  refreshTokenTimeInterval,
+  userData
 })
 
 export default rootReducer

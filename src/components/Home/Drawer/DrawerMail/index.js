@@ -58,11 +58,15 @@ const numberWithCommas = (x) =>{
 
 
 export default function DrawerMail() {
-    const urls = useSelector(state => state.urls);
+    
     const classes = useStyles();
+
+    const urls = useSelector(state => state.urls);
     const drawerMailFormData = useSelector(state => state.drawerMailFormData);
     const selectedProperty = useSelector(state => state.selectedProperty);
     const showSelectedProperty = useSelector(state => state.showSelectedProperty);
+    const userData = useSelector(state => state.userData);
+
     const dispatch = useDispatch();
     let [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
@@ -187,6 +191,10 @@ export default function DrawerMail() {
                             );
     }
 
+    let isPropertyOwner = false
+    isPropertyOwner = userData.properties.some(userPropUnit => userPropUnit == selectedProperty.properties.unit)
+
+    
 
 
     return (
@@ -212,7 +220,9 @@ export default function DrawerMail() {
                                     <p className={classes.title}>Unit</p>
                                     <p className={classes.title}>Unit Type</p>
                                     <p className={classes.title}>Price</p>
+                                    {isPropertyOwner &&  <p className={classes.title}>Owner</p>}
                                     <p style={{marginBottom:0, marginTop:20,fontWeight:'bolder', color:statusTextColor()}}>{selectedProperty.properties.status}</p>
+
                                 </Grid>
 
 
@@ -220,6 +230,7 @@ export default function DrawerMail() {
                                             <p className={classes.value}>{selectedProperty.properties.unit}</p>
                                             <p className={classes.value}>{selectedProperty.properties.property_type}</p>
                                             <p className={classes.value}>${numberWithCommas(selectedProperty.properties.price)}</p>
+                                            {isPropertyOwner && <p className={classes.value}> {userData.username} </p>}
                                             <p className={classes.value} style={{textAlign:'right', marginTop:10}} >
                                                 <Button onClick={handleCloseDetails} size="small" variant="contained" color="primary">
                                                     CLOSE DETAILS

@@ -8,11 +8,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faHome, faSearch, faList, faEnvelope, 
         faArrowLeft, faArrowRight, faArrowDown, 
-        faArrowUp, faSpinner,faUserCheck, faUserSlash } from '@fortawesome/free-solid-svg-icons'
+        faArrowUp, faSpinner,faUserCheck, faUserSlash, faMapMarker } from '@fortawesome/free-solid-svg-icons'
 
 library.add(fab, faHome, faSearch, faList, 
             faEnvelope, faArrowLeft, faArrowRight, faArrowDown, 
-            faArrowUp, faSpinner,faUserCheck, faUserSlash)
+            faArrowUp, faSpinner,faUserCheck, faUserSlash, faMapMarker)
 
 
 // configure app theme for material ui

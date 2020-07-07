@@ -20,19 +20,19 @@ ReactDOM.render(
 
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-    <BrowserRouter>
+      <BrowserRouter>
 
-      <Switch>
-        <Route path="/signin" exact component={SignIn} />
-        <Route path="/signup" exact component={SignUp} />
-        <Route path="/" exact component={App} />
-        
+        <Switch>
+          <Route path="/signin" exact component={SignIn} />
+          <Route path="/signup" exact component={SignUp} />
+          <Route path="/" exact component={App} />
+          
 
-        {/* Catch Error 404 */}
-        <Route component={NoMatch} />
-      </Switch>
+          {/* Catch Error 404 */}
+          <Route component={NoMatch} />
+        </Switch>
 
-    </BrowserRouter>
+      </BrowserRouter>
     </ThemeProvider>
   </Provider>
   ,

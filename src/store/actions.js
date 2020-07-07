@@ -5,6 +5,7 @@ const axios = require('axios').default;
  * action types
  */
 export const BACKEND_DOMAIN = 'https://backend.survtechengineering.com/estateman'
+// export const BACKEND_DOMAIN = 'http://localhost:8000'
 export const SHOW_MENU = 'SHOW_MENU'
 export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
 export const SHOW_DRAWER = 'SHOW_DRAWER'
@@ -20,6 +21,7 @@ export const SET_SELECTED_PROPERTY_VISIBILITY = 'SET_SELECTED_PROPERTY_VISIBILIT
 export const SET_FILTERED_PROPERTIES = 'SET_FILTERED_PROPERTIES'
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN'
 export const AUTH_LOGOUT = 'AUTH_LOGOUT'
+export const UPDATE_USER_DATA = 'UPDATE_USER_DATA'
 
 /*
  * other constants
@@ -98,6 +100,10 @@ export function authLogout(){
   return {type: AUTH_LOGOUT}
 }
 
+export function updateUserData(payload){
+  return {type: UPDATE_USER_DATA, payload}
+}
+
 
 // export const checkAuthTimeoutAsync = expirationTime=>{
 //   return dispatch => {
@@ -134,7 +140,7 @@ export const authCheckStateAsync = ()=>{
 }
 
 
-export const refreshTokenAtIntervals = (token, url, tokenExpiryTime, refreshTokenTimeInterval)=>{
+export const refreshTokenAtIntervalsAsync = (token, url, tokenExpiryTime, refreshTokenTimeInterval)=>{
 
   return dispatch => {
 
@@ -170,5 +176,32 @@ export const refreshTokenAtIntervals = (token, url, tokenExpiryTime, refreshToke
     }, refreshTokenTimeInterval); //3min
 
   }
+
+}
+
+
+
+export const fetchUserDataAsync = url => {
+
+  return dispatch => {
+
+    return axios.get(url,{
+        params: {
+        //   ID: 12345
+        }, 
+        withCredentials: true
+    })
+    .then(response => {
+        // console.log(response)
+
+        if (response.data)
+        { 
+            dispatch(updateUserData(response.data));
+            return Promise.resolve(response.data)
+        }
+    })
+
+  }
+
 
 }
