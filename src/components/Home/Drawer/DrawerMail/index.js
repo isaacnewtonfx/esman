@@ -115,7 +115,7 @@ export default function DrawerMail() {
                 formData.append('status', prop.status);
             }
 
-            axios.post(urls.enquiryURL, formData)
+            axios.post(urls.enquiryURL, formData, {withCredentials: true})
               .then(function (response) {
                 
                 if(response.data.status === "success"){
