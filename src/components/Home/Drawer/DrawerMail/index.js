@@ -121,7 +121,7 @@ export default function DrawerMail() {
                 method: 'post',
                 body: formData,
                 headers: {authorization: "Bearer " + localStorage.token,
-                                        'Content-Type': 'application/x-www-form-urlencoded'} 
+                                        'Content-Type': 'multipart/form-data'} 
             }).then(function(response) {
                 return response.json();
             }).then(function(data) {
