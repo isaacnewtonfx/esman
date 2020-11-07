@@ -115,12 +115,15 @@ export default function DrawerMail() {
                 formData.append('status', prop.status);
             }
 
+            console.log(JSON.stringify(formData));
+
 
             fetch(urls.enquiryURL, {
                 credentials:'include',
                 method: 'post',
                 body: JSON.stringify(formData),
-                headers: {authorization: "Bearer " + localStorage.token} 
+                headers: {authorization: "Bearer " + localStorage.token,
+                                        'Content-Type': 'application/json'} 
             }).then(function(response) {
                 return response.json();
             }).then(function(data) {
