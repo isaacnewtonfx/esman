@@ -115,13 +115,17 @@ export default function DrawerMail() {
                 formData.append('status', prop.status);
             }
 
-            axios.post(urls.enquiryURL, formData,  {withCredentials: true, 
-                                                    headers: {authorization: "Bearer " + localStorage.token,
-                                                            'Content-Type': 'application/x-www-form-urlencoded'}                                                    
-                                                    })
-              .then(function (response) {
-                
-                if(response.data.status === "success"){
+
+            fetch(urls.enquiryURL, {
+                method: 'post',
+                body: JSON.stringify(formData),
+                headers: {authorization: "Bearer " + localStorage.token,
+                                        'Content-Type': 'application/x-www-form-urlencoded'} 
+            }).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+            
+                if(data.status === "success"){
                     dispatch(updateSnackbarData({ message: 'Enquiry sent', openStatus: true }));
 
                     // reset form entries
@@ -133,20 +137,54 @@ export default function DrawerMail() {
                     resetCountry();
                     resetPublicity();
                     resetClientMessage();
-
-
                 }else{
                     dispatch(updateSnackbarData({ message: 'There was a problem. Please try again', openStatus: true }));
                 }
 
-              })
-              .catch(function (error) {
+                setIsFormSubmitting(false);
+
+            }).catch(function (error) {
                 console.log(error);
-              })
-              .finally(function () {
-                // always executed
-                setIsFormSubmitting(false)
-              }); 
+                setIsFormSubmitting(false);
+            });
+
+
+            // axios.post(urls.enquiryURL, formData,  {withCredentials: true, 
+            //                                         headers: {authorization: "Bearer " + localStorage.token,
+            //                                                 'Content-Type': 'application/x-www-form-urlencoded'}                                                    
+            //                                         })
+            //   .then(function (response) {
+                
+            //     if(response.data.status === "success"){
+            //         dispatch(updateSnackbarData({ message: 'Enquiry sent', openStatus: true }));
+
+            //         // reset form entries
+            //         resetTitle();
+            //         resetFirstName();
+            //         resetLastName();
+            //         resetEmail();
+            //         resetMobilePhone();
+            //         resetCountry();
+            //         resetPublicity();
+            //         resetClientMessage();
+
+
+            //     }else{
+            //         dispatch(updateSnackbarData({ message: 'There was a problem. Please try again', openStatus: true }));
+            //     }
+
+            //   })
+            //   .catch(function (error) {
+            //     console.log(error);
+            //   })
+            //   .finally(function () {
+            //     // always executed
+            //     setIsFormSubmitting(false)
+            //   }); 
+
+
+
+
 
         } else {
             setIsFormSubmitting(false);
