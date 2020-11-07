@@ -119,9 +119,8 @@ export default function DrawerMail() {
             fetch(urls.enquiryURL, {
                 credentials:'include',
                 method: 'post',
-                body: formData,
-                headers: {authorization: "Bearer " + localStorage.token,
-                                        'Content-Type': 'multipart/form-data'} 
+                body: JSON.stringify(formData),
+                headers: {authorization: "Bearer " + localStorage.token} 
             }).then(function(response) {
                 return response.json();
             }).then(function(data) {
