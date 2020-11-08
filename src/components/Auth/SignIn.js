@@ -129,7 +129,8 @@ export default function SignIn() {
       formData.append('username', username);
       formData.append('password', password);
 
-      console.log(formData)
+      console.log(formData.get("username"))
+      console.log(formData.get("password"))
   
       axios.post(urls.authURL, formData)
       .then(function (response) {
