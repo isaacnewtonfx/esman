@@ -129,7 +129,7 @@ export default function SignIn() {
       formData.append('username', username);
       formData.append('password', password);
   
-      axios.post(urls.authURL, formData, {withCredentials: true})
+      axios.post(urls.authURL, formData)
       .then(function (response) {
           
         if(response.status === 200 && response.data.token.split(".").length === 3){
