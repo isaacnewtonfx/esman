@@ -131,6 +131,8 @@ export default function SignIn() {
   
       axios.post(urls.authURL, formData)
       .then(function (response) {
+
+        console.log(response)
           
         if(response.status === 200 && response.data.token.split(".").length === 3){
           
