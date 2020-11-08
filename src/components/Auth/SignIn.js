@@ -16,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Snackbar from '../../components/Snackbar';
 import {Redirect} from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import {updateSnackbarData, setAuthToken, refreshTokenAtIntervalsAsync,authCheckStateAsync,fetchUserDataAsync} from '../../store/actions';
 
@@ -212,7 +213,7 @@ export default function SignIn() {
                   />
                   { usernameValidation.status && <span className={classes.validation}>{usernameValidation.msg}</span>}
 
-                  <TextField
+                  <TextField                    
                     variant="outlined"
                     margin="normal"
                     required
@@ -233,21 +234,25 @@ export default function SignIn() {
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
                   />
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    onClick={submitForm}
-                  >
-                    Sign In
 
-                    {isFormSubmitting &&
-                        <FontAwesomeIcon className="fa-spin" icon="spinner" />
-                    }
+                  <Tooltip title="Click me again if I'm taking too long" aria-label="Click me again if I'm taking too long">
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      className={classes.submit}
+                      onClick={submitForm}
+                    >
+                      Sign In
 
-                  </Button>
+                      {isFormSubmitting &&
+                          <FontAwesomeIcon className="fa-spin" icon="spinner" />
+                      }
+
+                    </Button>
+                  </Tooltip>
+
                   <Grid container>
                     <Grid item xs>
                       <Link href="#" variant="body2">
