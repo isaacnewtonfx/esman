@@ -128,14 +128,9 @@ export default function SignIn() {
       let formData = new FormData();
       formData.append('username', username);
       formData.append('password', password);
-
-      console.log(formData.get("username"))
-      console.log(formData.get("password"))
   
       axios.post(urls.authURL, formData)
       .then(function (response) {
-
-        console.log(response)
           
         if(response.status === 200 && response.data.token.split(".").length === 3){
           

@@ -115,50 +115,20 @@ export default function DrawerMail() {
                 formData.append('status', prop.status);
             }
 
-            console.log(JSON.stringify(formData));
+            // console.log(JSON.stringify(formData));
 
 
-            fetch(urls.enquiryURL, {
-                credentials:'include',
-                method: 'post',
-                body: JSON.stringify(formData),
-                headers: {authorization: "Bearer " + localStorage.token,
-                                        'Content-Type': 'application/json'} 
-            }).then(function(response) {
-                return response.json();
-            }).then(function(data) {
+            // fetch(urls.enquiryURL, {
+            //     credentials:'include',
+            //     method: 'post',
+            //     body: JSON.stringify(formData),
+            //     headers: {authorization: "Bearer " + localStorage.token,
+            //                             'Content-Type': 'application/json'} 
+            // }).then(function(response) {
+            //     return response.json();
+            // }).then(function(data) {
             
-                if(data.status === "success"){
-                    dispatch(updateSnackbarData({ message: 'Enquiry sent', openStatus: true }));
-
-                    // reset form entries
-                    resetTitle();
-                    resetFirstName();
-                    resetLastName();
-                    resetEmail();
-                    resetMobilePhone();
-                    resetCountry();
-                    resetPublicity();
-                    resetClientMessage();
-                }else{
-                    dispatch(updateSnackbarData({ message: 'There was a problem. Please try again', openStatus: true }));
-                }
-
-                setIsFormSubmitting(false);
-
-            }).catch(function (error) {
-                console.log(error);
-                setIsFormSubmitting(false);
-            });
-
-
-            // axios.post(urls.enquiryURL, formData,  {withCredentials: true, 
-            //                                         headers: {authorization: "Bearer " + localStorage.token,
-            //                                                 'Content-Type': 'application/x-www-form-urlencoded'}                                                    
-            //                                         })
-            //   .then(function (response) {
-                
-            //     if(response.data.status === "success"){
+            //     if(data.status === "success"){
             //         dispatch(updateSnackbarData({ message: 'Enquiry sent', openStatus: true }));
 
             //         // reset form entries
@@ -170,23 +140,47 @@ export default function DrawerMail() {
             //         resetCountry();
             //         resetPublicity();
             //         resetClientMessage();
-
-
             //     }else{
             //         dispatch(updateSnackbarData({ message: 'There was a problem. Please try again', openStatus: true }));
             //     }
 
-            //   })
-            //   .catch(function (error) {
+            //     setIsFormSubmitting(false);
+
+            // }).catch(function (error) {
             //     console.log(error);
-            //   })
-            //   .finally(function () {
-            //     // always executed
-            //     setIsFormSubmitting(false)
-            //   }); 
+            //     setIsFormSubmitting(false);
+            // });
 
 
+            axios.post(urls.enquiryURL, formData,  {headers: {authorization: "Bearer " + localStorage.token}})
+              .then(function (response) {
+                
+                if(response.data.status === "success"){
+                    dispatch(updateSnackbarData({ message: 'Enquiry sent', openStatus: true }));
 
+                    // reset form entries
+                    resetTitle();
+                    resetFirstName();
+                    resetLastName();
+                    resetEmail();
+                    resetMobilePhone();
+                    resetCountry();
+                    resetPublicity();
+                    resetClientMessage();
+
+
+                }else{
+                    dispatch(updateSnackbarData({ message: 'There was a problem. Please try again', openStatus: true }));
+                }
+
+              })
+              .catch(function (error) {
+                console.log(error);
+              })
+              .finally(function () {
+                // always executed
+                setIsFormSubmitting(false)
+              }); 
 
 
         } else {
