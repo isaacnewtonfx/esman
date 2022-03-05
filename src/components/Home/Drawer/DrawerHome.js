@@ -97,7 +97,7 @@ class DrawerHome extends React.Component{
 
                     <h3>Our Master-Planned Communities set the pace for real estate development this side of Africa</h3>
                     <p>Peace of mind, Serenity, Utmost Security, Convenience, Healthy Living are the words our current residents have used to describe our developments.</p>
-                    <p><strong>Website:&nbsp;</strong><a title="https://estateman1.herokuapp.com/" href="#" target="_blank">https://estateman.com/</a></p>
+                    <p><strong>Website:&nbsp;</strong><a title="https://estateman.wheregeospatial.com/" href="#" target="_blank">https://estateman.wheregeospatial.com/</a></p>
                     
                 </section>
 
