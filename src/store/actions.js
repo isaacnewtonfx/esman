@@ -4,7 +4,7 @@ const axios = require('axios').default;
 /*
  * action types
  */
-export const BACKEND_DOMAIN = 'https://backend.survtechengineering.com/estateman'
+export const BACKEND_DOMAIN = 'https://estatemanbackend.wheregeospatial.com'
 // export const BACKEND_DOMAIN = 'http://localhost:8000'
 export const SHOW_MENU = 'SHOW_MENU'
 export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
